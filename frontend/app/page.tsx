@@ -6,13 +6,13 @@ export default function Home() {
     <div className="flex flex-1 flex-col justify-between bg-gray-900 px-26 py-12">
       <div className="flex items-center justify-between">
         <div className="text-xl">Artur Wiśniewski</div>
-        <div className="flex space-x-4">
+        <div className="before:w- relative flex space-x-4 before:absolute before:top-1/2 before:right-26 before:h-px before:w-6 before:-translate-y-1/2 before:bg-[#e6e6e6] before:content-['']">
           <IconGitHub />
           <IconLinkedin />
         </div>
       </div>
       <div className="ml-24">
-        <h1 className="relative mb-6 inline-block text-9xl font-bold after:absolute after:right-0 after:-bottom-2 after:left-1/2 after:border-b after:border-[#e6e6e6]">
+        <h1 className="relative mb-6 inline-block text-9xl font-bold before:absolute before:right-0 before:-bottom-2 before:left-1/2 before:border-b before:border-[#e6e6e6]">
           Hello
         </h1>
         <p className="ml-24">
