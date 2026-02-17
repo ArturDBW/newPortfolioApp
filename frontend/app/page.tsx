@@ -3,7 +3,7 @@ import IconLinkedin from "./icons/IconLinkedin";
 
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col justify-between bg-gray-900 px-26 py-12">
+    <div className="flex w-full flex-col justify-between bg-gray-900 px-26 py-12">
       <div className="flex items-center justify-between">
         <div className="text-xl">Artur Wiśniewski</div>
         <div className="before:w- relative flex space-x-4 before:absolute before:top-1/2 before:right-26 before:h-px before:w-6 before:-translate-y-1/2 before:bg-[#e6e6e6] before:content-['']">
