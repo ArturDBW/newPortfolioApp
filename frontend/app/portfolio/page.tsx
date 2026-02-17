@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Page() {
   const liStyles =
@@ -30,34 +30,63 @@ export default function Page() {
 
   const [activeImage, setActiveImage] = useState(items[0].image);
   const [showGreyWipe, setShowGreyWipe] = useState(false);
+  const timeoutsRef = useRef<number[]>([]);
 
+  const clearAllTimeouts = () => {
+    timeoutsRef.current.forEach((t) => clearTimeout(t));
+    timeoutsRef.current = [];
+  };
   const changeImage = (img: string) => {
-    setShowGreyWipe(true); // maska wjeżdża
+    // anuluj wszystkie poprzednie timeouty
+    clearAllTimeouts();
 
-    // Po szybkim wjeździe (0.2s) zmieniamy obraz
-    setTimeout(() => setActiveImage(img), 350);
+    // rozpocznij animację
+    setShowGreyWipe(true);
 
-    // Po ~1s od początku animacja wyjeżdża
-    setTimeout(() => setShowGreyWipe(false), 800);
+    // timeout do zmiany obrazka po wjeździe maski
+    const t1 = window.setTimeout(() => {
+      setActiveImage(img);
+    }, 350); // dopasowane do duration-500
+
+    // timeout do wyjazdu maski po ~1s
+    const t2 = window.setTimeout(() => {
+      setShowGreyWipe(false);
+    }, 700);
+
+    timeoutsRef.current.push(t1, t2);
   };
   return (
     <div className="flex w-full">
       <div className="flex flex-2 flex-col items-center justify-center bg-white">
         <ul className="space-y-10 text-[#011933]">
-          {items.map((item) => (
-            <li
-              key={item.id}
-              className={liStyles}
-              onMouseEnter={() => changeImage(item.image)}
-            >
-              <span className="mr-3 text-xl transition-all group-hover:text-[#8A6B0C]">
-                {item.title}
-              </span>
-              <span className="text-lg text-[#aaa] transition-all group-hover:text-[#8d8d8d]">
-                {item.desc}
-              </span>
-            </li>
-          ))}
+          {items.map((item) => {
+            const isActive = item.image === activeImage;
+
+            return (
+              <li
+                key={item.id}
+                className={`${liStyles} ${
+                  isActive ? "translate-x-6 before:opacity-100" : ""
+                }`}
+                onMouseEnter={() => changeImage(item.image)}
+              >
+                <span
+                  className={`mr-3 text-xl transition-all group-hover:text-[#8A6B0C] ${
+                    isActive ? "text-[#8A6B0C]" : ""
+                  }`}
+                >
+                  {item.title}
+                </span>
+                <span
+                  className={`text-lg text-[#aaa] transition-all group-hover:text-[#8d8d8d] ${
+                    isActive ? "text-[#8d8d8d]" : ""
+                  }`}
+                >
+                  {item.desc}
+                </span>
+              </li>
+            );
+          })}
         </ul>
       </div>
       <div className="flex-3">
