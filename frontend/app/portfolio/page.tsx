@@ -29,17 +29,17 @@ export default function Page() {
   ];
 
   const [activeImage, setActiveImage] = useState(items[0].image);
-
-  const [visible, setVisible] = useState(true);
+  const [showGreyWipe, setShowGreyWipe] = useState(false);
 
   const changeImage = (img: string) => {
-    setVisible(false);
-    setTimeout(() => {
-      setActiveImage(img);
-      setVisible(true);
-    }, 200);
-  };
+    setShowGreyWipe(true); // maska wjeżdża
 
+    // Po szybkim wjeździe (0.2s) zmieniamy obraz
+    setTimeout(() => setActiveImage(img), 350);
+
+    // Po ~1s od początku animacja wyjeżdża
+    setTimeout(() => setShowGreyWipe(false), 800);
+  };
   return (
     <div className="flex w-full">
       <div className="flex flex-2 flex-col items-center justify-center bg-white">
@@ -63,14 +63,18 @@ export default function Page() {
       <div className="flex-3">
         <div className="flex flex-3 items-center justify-center">
           <div className="relative h-screen w-full overflow-hidden">
+            <div
+              className={`absolute inset-0 z-10 bg-gray-50 transition-transform duration-350 ${
+                showGreyWipe ? "translate-x-0" : "-translate-x-full"
+              }`}
+            />
+
             <Image
               src={activeImage}
               alt=""
               fill
               priority
-              className={`object-cover transition-opacity duration-500 ${
-                visible ? "opacity-100" : "opacity-0"
-              }`}
+              className="object-cover transition-opacity duration-500"
             />
           </div>
         </div>
