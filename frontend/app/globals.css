@@ -31,6 +31,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Routing animations */
+
 @keyframes white-wipe {
   0% {
     transform: translateX(-100%);
@@ -42,6 +44,8 @@ body {
     transform: translateX(-100%);
   }
 }
+
+/* Image animations */
 
 @keyframes grey-wipe {
   0% {
@@ -76,4 +80,36 @@ body {
 }
 .grey-wipe.hide {
   transform: translateX(100%); /* wyjeżdża */
+}
+
+/* String animations */
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+}
+
+.slide-down-animation {
+  animation: slide-down 1.6s ease-in-out forwards 1s;
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-100px);
+    opacity: 1;
+  }
+}
+
+.slide-up-animation {
+  animation: slide-up 1.6s ease-in-out forwards 1s;
 }
