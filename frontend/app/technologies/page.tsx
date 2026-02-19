@@ -13,11 +13,9 @@ import IconTypeScript from "../icons/IconTypeScript";
 import IconVite from "../icons/IconVite";
 
 export default function Page() {
-  const isActive = true;
-
   return (
     <>
-      {isActive && <div className="white-wipe-out" />}
+      <div className="white-wipe-out" />
       <div className="flex w-full">
         <div className="flex-3 bg-white">
           <div className="border-b border-[#e6e6e6] px-25 py-30">
@@ -53,14 +51,16 @@ export default function Page() {
           </div>
         </div>
         <div
-          className="flex-2 bg-cover bg-center bg-no-repeat"
+          className="relative flex-2 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: "url('/img/technologiesbgimage.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "25% center",
             backgroundRepeat: "no-repeat",
           }}
-        ></div>
+        >
+          <div className="grey-wipe-out absolute" />
+        </div>
       </div>
     </>
   );

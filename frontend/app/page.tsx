@@ -21,6 +21,7 @@ export default function Home() {
           <span>l</span>
           <span>o</span>
         </h1>
+
         <div className="line-fade-animation mb-6 ml-24 h-px w-72 bg-[#e6e6e6] opacity-0">
           &nbsp;
         </div>

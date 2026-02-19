@@ -57,16 +57,6 @@ body {
   }
 }
 
-@keyframes wipeOut {
-  0% {
-    transform: scaleX(1);
-  }
-
-  100% {
-    transform: scaleX(0);
-  }
-}
-
 /* Routing animation */
 
 /* @keyframes wipeIn {
@@ -89,21 +79,39 @@ body {
   transform: scaleX(0); 
 } */
 
+@keyframes wipeOut {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
 .white-wipe-out {
   position: fixed;
   inset: 0;
-  background: white;
+  background: #fff;
   z-index: 9;
   transform-origin: left; /* start animacji od prawej */
-  animation: wipeOut 3.4s linear forwards;
+  animation: wipeOut 1.8s ease-in forwards;
+}
+.grey-wipe-out {
+  position: absolute; /* w granicach rodzica */
+  inset: 0;
+  background: #f9fafb;
+  z-index: 5;
+  transform-origin: left; /* start animacji od prawej */
+  animation: wipeOut 0.7s ease-out forwards 1.3s;
 }
 .grey-wipe {
   position: absolute; /* w granicach rodzica */
   inset: 0;
-  background: #dddcdc;
+  background: #f9fafb;
   z-index: 9;
   transform: translateX(-100%);
-  transition: transform 0.2s ease-in; /* szybkie wejście */
+  transition: transform 0.2s ease-out; /* szybkie wejście */
 }
 .grey-wipe.show {
   transform: translateX(0); /* wjeżdża */
@@ -112,7 +120,7 @@ body {
   transform: translateX(100%); /* wyjeżdża */
 }
 
-/* String animations */
+/* Text animations */
 
 @keyframes slide-down {
   0% {
@@ -142,6 +150,21 @@ body {
 
 .slide-up-animation {
   animation: slide-up 1.6s ease-in-out forwards 1s;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-right {
+  animation: fadeInRight 1.6s ease-out forwards 0.6s;
 }
 
 /* H1 animation */
