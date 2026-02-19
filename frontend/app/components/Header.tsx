@@ -39,6 +39,13 @@ export default function Header() {
               About
             </li>
           </Link>
+          <Link href="/test">
+            <li
+              className={`${isActive("/test") ? "text-[#222222]" : "text-[#aaaaaa]"} transition-all hover:text-[#222222]`}
+            >
+              test
+            </li>
+          </Link>
         </ul>
       </nav>
       <div className="flex flex-col font-bold text-[#aaaaaa]">

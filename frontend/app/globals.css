@@ -58,13 +58,14 @@ body {
 }
 
 /* Routing animation */
+/*  -------------------------------------------------------------------- */
 
-/* @keyframes wipeIn {
-  0% {
+@keyframes wipeIn {
+  from {
     transform: scaleX(0);
   }
 
-  100% {
+  to {
     transform: scaleX(1);
   }
 }
@@ -73,11 +74,12 @@ body {
   position: fixed;
   inset: 0;
   z-index: 9;
-  transform-origin: left; 
-  animation: wipeIn 3.4s ease-in-out forwards 3.4s;
-  background-color: #fff;
-  transform: scaleX(0); 
-} */
+  transform-origin: left;
+  background: #fff;
+  animation: wipeIn 1.8s ease-in forwards;
+}
+
+/*  -------------------------------------------------------------------- */
 
 @keyframes wipeOut {
   from {
@@ -150,6 +152,13 @@ body {
 
 .slide-up-animation {
   animation: slide-up 1.6s ease-in-out forwards 1s;
+}
+
+.slide-up-animation-2s {
+  animation: slide-up 1.6s ease-in-out forwards 1.5s;
+}
+.slide-up-animation-3s {
+  animation: slide-up 1.6s ease-in-out forwards 2s;
 }
 
 @keyframes fadeInRight {

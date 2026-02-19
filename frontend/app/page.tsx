@@ -8,7 +8,7 @@ export default function Home() {
         <div className="slide-down-animation -translate-y-25 text-xl font-bold">
           Artur Wiśniewski
         </div>
-        <div className="before:w- slide-down-animation relative flex -translate-y-25 space-x-4 before:absolute before:top-1/2 before:right-26 before:h-px before:w-6 before:-translate-y-1/2 before:bg-[#e6e6e6] before:content-['']">
+        <div className="slide-down-animation relative flex -translate-y-25 space-x-4 before:absolute before:top-1/2 before:right-26 before:h-px before:w-6 before:-translate-y-1/2 before:bg-[#e6e6e6] before:content-['']">
           <IconGitHub />
           <IconLinkedin />
         </div>
