@@ -56,58 +56,62 @@ export default function Page() {
     timeoutsRef.current.push(t1, t2);
   };
   return (
-    <div className="flex w-full">
-      <div className="flex flex-2 flex-col items-center justify-center bg-white">
-        <ul className="space-y-10 text-[#011933]">
-          {items.map((item) => {
-            const isActive = item.image === activeImage;
+    <>
+      <div className="white-wipe-out" />
+      <div className="flex w-full">
+        <div className="flex flex-2 flex-col items-center justify-center bg-white">
+          <ul className="space-y-10 text-[#011933]">
+            {items.map((item) => {
+              const isActive = item.image === activeImage;
 
-            return (
-              <li
-                key={item.id}
-                className={`${liStyles} ${
-                  isActive ? "translate-x-6 before:opacity-100" : ""
+              return (
+                <li
+                  key={item.id}
+                  className={`${liStyles} ${
+                    isActive ? "translate-x-6 before:opacity-100" : ""
+                  } fade-in-right`}
+                  onMouseEnter={() => changeImage(item.image)}
+                >
+                  <span
+                    className={`mr-3 text-xl transition-all group-hover:text-[#8A6B0C] ${
+                      isActive ? "text-[#8A6B0C]" : ""
+                    }`}
+                  >
+                    {item.title}
+                  </span>
+                  <span
+                    className={`text-lg text-[#aaa] transition-all group-hover:text-[#8d8d8d] ${
+                      isActive ? "text-[#8d8d8d]" : ""
+                    }`}
+                  >
+                    {item.desc}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="flex-3">
+          <div className="flex flex-3 items-center justify-center">
+            <div className="relative h-screen w-full overflow-hidden">
+              <div
+                className={`absolute inset-0 z-10 bg-gray-50 transition-transform duration-350 ${
+                  showGreyWipe ? "translate-x-0" : "-translate-x-full"
                 }`}
-                onMouseEnter={() => changeImage(item.image)}
-              >
-                <span
-                  className={`mr-3 text-xl transition-all group-hover:text-[#8A6B0C] ${
-                    isActive ? "text-[#8A6B0C]" : ""
-                  }`}
-                >
-                  {item.title}
-                </span>
-                <span
-                  className={`text-lg text-[#aaa] transition-all group-hover:text-[#8d8d8d] ${
-                    isActive ? "text-[#8d8d8d]" : ""
-                  }`}
-                >
-                  {item.desc}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div className="flex-3">
-        <div className="flex flex-3 items-center justify-center">
-          <div className="relative h-screen w-full overflow-hidden">
-            <div
-              className={`absolute inset-0 z-10 bg-gray-50 transition-transform duration-350 ${
-                showGreyWipe ? "translate-x-0" : "-translate-x-full"
-              }`}
-            />
+              />
 
-            <Image
-              src={activeImage}
-              alt=""
-              fill
-              priority
-              className="object-cover transition-opacity duration-500"
-            />
+              <Image
+                src={activeImage}
+                alt=""
+                fill
+                priority
+                className="object-cover transition-opacity duration-500"
+              />
+              <div className="grey-wipe-out" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
