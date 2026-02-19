@@ -44,7 +44,6 @@ export default function Header({ onNavigate }: Props) {
               Technologies
             </Link>
           </li>
-
           <li>
             <Link
               href="/portfolio"
@@ -54,7 +53,6 @@ export default function Header({ onNavigate }: Props) {
               Portfolio
             </Link>
           </li>
-
           <li>
             <Link
               href="/"
@@ -62,16 +60,6 @@ export default function Header({ onNavigate }: Props) {
               className={linkClass("/")}
             >
               About
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              href="/test"
-              onClick={(e) => handleClick(e, "/test")}
-              className={linkClass("/test")}
-            >
-              Test
             </Link>
           </li>
         </ul>
