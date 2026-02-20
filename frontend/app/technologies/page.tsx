@@ -51,7 +51,7 @@ export default function Page() {
           </div>
         </div>
         <div
-          className="relative flex-2 bg-cover bg-center bg-no-repeat"
+          className="sticky top-0 right-0 h-screen flex-2 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: "url('/img/technologiesbgimage.jpg')",
             backgroundSize: "cover",
