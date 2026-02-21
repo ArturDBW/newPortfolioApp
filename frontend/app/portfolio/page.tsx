@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
+import DetailsButton from "../components/DetailsButton";
 
 export default function Page() {
   const liStyles =
@@ -93,7 +94,7 @@ export default function Page() {
         </div>
         <div className="flex-3">
           <div className="flex flex-3 items-center justify-center">
-            <div className="relative h-screen w-full overflow-hidden">
+            <div className="group relative h-screen w-full overflow-hidden">
               <div
                 className={`absolute inset-0 z-10 bg-gray-50 transition-transform duration-350 ${
                   showGreyWipe ? "translate-x-0" : "-translate-x-full"
@@ -105,8 +106,9 @@ export default function Page() {
                 alt=""
                 fill
                 priority
-                className="object-cover transition-opacity duration-500"
+                className="object-cover transition-transform duration-2000 ease-out group-hover:scale-105"
               />
+              <DetailsButton />
               <div className="grey-wipe-out" />
             </div>
           </div>
