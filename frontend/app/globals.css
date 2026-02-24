@@ -150,6 +150,14 @@ body {
   }
 }
 
+.slide-up-animation-now {
+  animation: slide-up 1.6s ease-in-out forwards;
+}
+
+.slide-up-animation-05s {
+  animation: slide-up 1.6s ease-in-out forwards 0.5s;
+}
+
 .slide-up-animation {
   animation: slide-up 1.6s ease-in-out forwards 1s;
 }
