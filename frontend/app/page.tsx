@@ -1,11 +1,12 @@
 import IconGitHub from "./icons/IconGitHub";
 import IconLinkedin from "./icons/IconLinkedin";
+import Spline from "@splinetool/react-spline";
 
 export default function Home() {
   return (
     <>
       <div className="white-wipe-out" />
-      <div className="flex h-screen w-full flex-col justify-between overflow-hidden bg-gray-900 px-26 py-12">
+      <div className="relative z-3 flex h-screen w-full flex-col justify-between px-26 py-12">
         <div className="flex items-center justify-between">
           <div className="slide-down-animation -translate-y-25 text-xl font-bold">
             Artur Wiśniewski
@@ -41,6 +42,12 @@ export default function Home() {
             arturwisniewski1998@gmail.com
           </div>
         </div>
+      </div>
+      <div className="absolute top-0 left-0 z-2 h-screen w-full overflow-hidden bg-black">
+        <Spline
+          scene="https://prod.spline.design/SxKuVXuZyQgVCFYp/scene.splinecode"
+          className="translate-x-130"
+        />
       </div>
     </>
   );
