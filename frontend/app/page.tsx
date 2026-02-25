@@ -46,7 +46,7 @@ export default function Home() {
       <div className="absolute top-0 left-0 z-2 h-screen w-full overflow-hidden bg-black">
         <Spline
           scene="https://prod.spline.design/SxKuVXuZyQgVCFYp/scene.splinecode"
-          className="translate-x-130"
+          className="robot-hidden-animation translate-x-130 opacity-0"
         />
       </div>
     </>
