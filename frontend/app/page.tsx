@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <div className="white-wipe-out" />
-      <div className="relative z-3 flex h-screen w-full flex-col justify-between px-26 py-12">
+      <div className="relative z-3 flex h-screen w-full flex-col justify-between overflow-hidden px-26 py-12">
         <div className="flex items-center justify-between">
           <div className="slide-down-animation -translate-y-25 text-xl font-bold">
             Artur Wiśniewski
