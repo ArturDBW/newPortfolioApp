@@ -8,18 +8,6 @@ import { useRouter } from "next/navigation";
 export default function Page() {
   const router = useRouter();
 
-  const handleImageClick = () => {
-    clearAllTimeouts(); // żeby nie było konfliktów
-
-    setFullscreenImage(true);
-
-    const t = window.setTimeout(() => {
-      router.push("/portfolio/test");
-    }, 2000); // tyle ile trwa animacja (duration-2000)
-
-    timeoutsRef.current.push(t);
-  };
-
   const liStyles =
     "group relative cursor-pointer transition-transform duration-500 before:absolute before:top-1/2 before:right-full before:mr-2 before:h-px before:w-4 before:-translate-y-1/2 before:bg-[#8A6B0C] before:opacity-0 before:transition-opacity before:duration-300 before:content-[''] hover:translate-x-6 hover:before:opacity-100";
 
@@ -48,6 +36,7 @@ export default function Page() {
   const [showGreyWipe, setShowGreyWipe] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState(false);
   const timeoutsRef = useRef<number[]>([]);
+  const navigationTimeoutRef = useRef<number | null>(null);
 
   const clearAllTimeouts = () => {
     timeoutsRef.current.forEach((t) => clearTimeout(t));
@@ -72,6 +61,26 @@ export default function Page() {
 
     timeoutsRef.current.push(t1, t2);
   };
+
+  const handleImageClick = () => {
+    if (fullscreenImage) return; // blokada wielokrotnego kliku
+
+    setFullscreenImage(true);
+
+    navigationTimeoutRef.current = window.setTimeout(() => {
+      router.push("/portfolio/test");
+    }, 2000);
+  };
+
+  useEffect(() => {
+    return () => {
+      clearAllTimeouts();
+      if (navigationTimeoutRef.current) {
+        clearTimeout(navigationTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <>
       <div className="white-wipe-out" />
