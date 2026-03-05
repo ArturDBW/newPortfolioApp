@@ -150,6 +150,14 @@ body {
   }
 }
 
+.slide-up-animation-now {
+  animation: slide-up 1.6s ease-in-out forwards;
+}
+
+.slide-up-animation-05s {
+  animation: slide-up 1.6s ease-in-out forwards 0.5s;
+}
+
 .slide-up-animation {
   animation: slide-up 1.6s ease-in-out forwards 1s;
 }
@@ -229,4 +237,64 @@ h1 span:nth-child(5) {
 .line-fade-animation {
   transform-origin: left;
   animation: line-fade 1s ease-in-out forwards 2s;
+}
+
+/* Button animations */
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.reveal-animation {
+  animation: reveal 3s ease-in-out infinite;
+}
+
+/*  */
+
+.fancy-btn::before,
+.fancy-btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  height: 1px;
+  width: 100px;
+  background: white;
+  transform: translateY(-50%) scaleX(0.4);
+  transform-origin: center;
+  transition: transform 0.4s ease;
+}
+
+.fancy-btn:hover::before,
+.fancy-btn:hover::after {
+  transform: translateY(-50%) scaleX(1);
+}
+
+/* Robot */
+
+@keyframes robot-hidden {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.robot-hidden-animation {
+  animation: robot-hidden 1.6s ease-in-out forwards 2s;
 }
