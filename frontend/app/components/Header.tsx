@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/app/i18n/navigation";
+import { useLocale } from "next-intl";
+// import { usePathname } from "next/navigation";
 
 type Props = {
   onNavigate: (href: string) => void;
@@ -9,6 +10,7 @@ type Props = {
 
 export default function Header({ onNavigate }: Props) {
   const pathname = usePathname();
+  const locale = useLocale();
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -22,7 +24,12 @@ export default function Header({ onNavigate }: Props) {
     href: string,
   ) => {
     e.preventDefault(); // blokujemy natychmiastowy navigation
-    onNavigate(href); // uruchamiamy animację → potem router.push
+
+    // Ręcznie budujemy ścieżkę z prefiksem językowym.
+    // Zabezpieczamy się przed podwójnym slashem np. /en/ zamiast /en
+    const localeHref = href === "/" ? `/${locale}` : `/${locale}${href}`;
+
+    onNavigate(localeHref); // uruchamiamy animację → potem router.push
   };
 
   const linkClass = (href: string) =>

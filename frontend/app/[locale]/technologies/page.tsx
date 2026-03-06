@@ -1,18 +1,21 @@
-import IconCSS from "../icons/IconCSS";
-import IconExpress from "../icons/IconExpress";
-import IconFigma from "../icons/IconFigma";
-import IconHTML from "../icons/IconHTML";
-import IconJavaScript from "../icons/IconJavaScript";
-import IconMongoDB from "../icons/IconMongoDB";
-import IconNextJS from "../icons/IconNextJS";
-import IconNodeJS from "../icons/IconNodeJS";
-import IconReact from "../icons/IconReact";
-import IconSass from "../icons/IconSass";
-import IconTailwind from "../icons/IconTailwind";
-import IconTypeScript from "../icons/IconTypeScript";
-import IconVite from "../icons/IconVite";
+import { useTranslations } from "next-intl";
+import IconCSS from "../../icons/IconCSS";
+import IconExpress from "../../icons/IconExpress";
+import IconFigma from "../../icons/IconFigma";
+import IconHTML from "../../icons/IconHTML";
+import IconJavaScript from "../../icons/IconJavaScript";
+import IconMongoDB from "../../icons/IconMongoDB";
+import IconNextJS from "../../icons/IconNextJS";
+import IconNodeJS from "../../icons/IconNodeJS";
+import IconReact from "../../icons/IconReact";
+import IconSass from "../../icons/IconSass";
+import IconTailwind from "../../icons/IconTailwind";
+import IconTypeScript from "../../icons/IconTypeScript";
+import IconVite from "../../icons/IconVite";
 
 export default function Page() {
+  const t = useTranslations("Technologies");
+
   return (
     <>
       <div className="white-wipe-out" />
@@ -28,10 +31,7 @@ export default function Page() {
           </div>
           <div className="border-b border-[#e6e6e6] px-25 py-20">
             <p className="slide-up-animation-2s translate-y-25 text-[#011933] opacity-0">
-              Below are the technologies I`ve used in completed projects and am
-              ready to apply in a Junior Developer <br /> role. I`m always eager
-              to learn new tools and frameworks, so this list is constantly
-              evolving as I expand my skill set.
+              {t("description")}
             </p>
           </div>
           <div className="slide-up-animation-3s flex translate-y-25 flex-wrap space-y-12 space-x-12 px-25 py-20 opacity-0">

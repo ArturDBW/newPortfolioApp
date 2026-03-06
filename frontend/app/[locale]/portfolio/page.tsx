@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
-import DetailsButton from "../components/DetailsButton";
+import DetailsButton from "../../components/DetailsButton";
 import { useRouter } from "next/navigation";
 
 export default function Page() {

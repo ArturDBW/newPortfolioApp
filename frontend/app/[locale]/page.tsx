@@ -1,5 +1,5 @@
-import IconGitHub from "./icons/IconGitHub";
-import IconLinkedin from "./icons/IconLinkedin";
+import IconGitHub from "../icons/IconGitHub";
+import IconLinkedin from "../icons/IconLinkedin";
 import Spline from "@splinetool/react-spline";
 
 export default function Home() {
