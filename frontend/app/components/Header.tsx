@@ -40,8 +40,9 @@ export default function Header({ onNavigate, onLocaleChange }: Props) {
 
   return (
     <header className="sticky top-0 left-0 z-10 flex h-screen w-25 flex-col items-center justify-between border-r border-[#e6e6e6] bg-white py-12 text-[#011933]">
-      <div className="text-3xl font-bold">dBw</div>
-
+      <Link href={"/"}>
+        <div className="text-3xl font-bold">dBw</div>
+      </Link>
       <nav className="rotate-270 text-sm font-bold tracking-widest uppercase">
         <ul className="flex space-x-10">
           <li>
