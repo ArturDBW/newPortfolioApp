@@ -1,12 +1,13 @@
 "use client";
 
+import { Link, useRouter } from "@/app/i18n/navigation";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 import DetailsButton from "../../components/DetailsButton";
-import { useRouter } from "next/navigation";
 
 export default function Page() {
   const router = useRouter();
+  const projectHref = "/portfolio/test" as const;
 
   const liStyles =
     "group relative cursor-pointer transition-transform duration-500 before:absolute before:top-1/2 before:right-full before:mr-2 before:h-px before:w-4 before:-translate-y-1/2 before:bg-[#8A6B0C] before:opacity-0 before:transition-opacity before:duration-300 before:content-[''] hover:translate-x-6 hover:before:opacity-100";
@@ -62,13 +63,22 @@ export default function Page() {
     timeoutsRef.current.push(t1, t2);
   };
 
-  const handleImageClick = () => {
+  const handleNavigateWithAnimation = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    e.preventDefault();
+
     if (fullscreenImage) return; // blokada wielokrotnego kliku
 
     setFullscreenImage(true);
 
+    if (navigationTimeoutRef.current) {
+      clearTimeout(navigationTimeoutRef.current);
+    }
+
     navigationTimeoutRef.current = window.setTimeout(() => {
-      router.push("/portfolio/test");
+      router.push(href);
     }, 2000);
   };
 
@@ -107,20 +117,27 @@ export default function Page() {
                     } fade-in-right`}
                     onMouseEnter={() => changeImage(item.image)}
                   >
-                    <span
-                      className={`mr-3 text-xl transition-all group-hover:text-[#8A6B0C] ${
-                        isActive ? "text-[#8A6B0C]" : ""
-                      }`}
+                    <Link
+                      href={projectHref}
+                      onClick={(e) =>
+                        handleNavigateWithAnimation(e, projectHref)
+                      }
                     >
-                      {item.title}
-                    </span>
-                    <span
-                      className={`text-lg text-[#aaa] transition-all group-hover:text-[#8d8d8d] ${
-                        isActive ? "text-[#8d8d8d]" : ""
-                      }`}
-                    >
-                      {item.desc}
-                    </span>
+                      <span
+                        className={`mr-3 text-xl transition-all group-hover:text-[#8A6B0C] ${
+                          isActive ? "text-[#8A6B0C]" : ""
+                        }`}
+                      >
+                        {item.title}
+                      </span>
+                      <span
+                        className={`text-lg text-[#aaa] transition-all group-hover:text-[#8d8d8d] ${
+                          isActive ? "text-[#8d8d8d]" : ""
+                        }`}
+                      >
+                        {item.desc}
+                      </span>
+                    </Link>
                   </li>
                 );
               })}
@@ -134,25 +151,27 @@ export default function Page() {
             fullscreenImage ? "w-full" : "w-[60%]"
           }`}
         >
-          <div
-            onClick={handleImageClick}
-            className="group relative h-full w-full overflow-hidden"
-          >
+          <div className="group relative h-full w-full overflow-hidden">
             <div
               className={`absolute inset-0 z-10 bg-gray-50 transition-transform duration-350 ${
                 showGreyWipe ? "translate-x-0" : "-translate-x-full"
               }`}
             />
-
-            <Image
-              src={activeImage}
-              alt=""
-              fill
-              priority
-              className={`cursor-pointer object-cover transition-transform duration-2000 ease-out ${
-                fullscreenImage ? "" : "group-hover:scale-105"
-              }`}
-            />
+            <Link
+              href={projectHref}
+              onClick={(e) => handleNavigateWithAnimation(e, projectHref)}
+              className="block h-full w-full"
+            >
+              <Image
+                src={activeImage}
+                alt=""
+                fill
+                priority
+                className={`cursor-pointer object-cover transition-transform duration-2000 ease-out ${
+                  fullscreenImage ? "" : "group-hover:scale-105"
+                }`}
+              />
+            </Link>
 
             {/* Tutaj ukrywamy przycisk DetailsButton, jeśli jesteśmy w fullscreen */}
             <div
