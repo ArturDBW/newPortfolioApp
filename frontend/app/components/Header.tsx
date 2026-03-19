@@ -1,14 +1,18 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/app/i18n/navigation";
+import { useLocale } from "next-intl";
+import type { Locale } from "@/app/i18n/routing";
+// import { usePathname } from "next/navigation";
 
 type Props = {
   onNavigate: (href: string) => void;
+  onLocaleChange: (locale: Locale) => void;
 };
 
-export default function Header({ onNavigate }: Props) {
+export default function Header({ onNavigate, onLocaleChange }: Props) {
   const pathname = usePathname();
+  const locale = useLocale();
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -22,17 +26,23 @@ export default function Header({ onNavigate }: Props) {
     href: string,
   ) => {
     e.preventDefault(); // blokujemy natychmiastowy navigation
-    onNavigate(href); // uruchamiamy animację → potem router.push
+    onNavigate(href); // next-intl router sam dodaje aktualny prefiks locale
   };
 
   const linkClass = (href: string) =>
     `${isActive(href) ? "text-[#222222]" : "text-[#aaaaaa]"} 
      transition-all hover:text-[#222222] cursor-pointer`;
 
+  const handleLocaleChange = (nextLocale: Locale) => {
+    if (nextLocale === locale) return;
+    onLocaleChange(nextLocale);
+  };
+
   return (
     <header className="sticky top-0 left-0 z-10 flex h-screen w-25 flex-col items-center justify-between border-r border-[#e6e6e6] bg-white py-12 text-[#011933]">
-      <div className="text-3xl font-bold">dBw</div>
-
+      <Link href={"/"}>
+        <div className="text-3xl font-bold">dBw</div>
+      </Link>
       <nav className="rotate-270 text-sm font-bold tracking-widest uppercase">
         <ul className="flex space-x-10">
           <li>
@@ -66,8 +76,22 @@ export default function Header({ onNavigate }: Props) {
       </nav>
 
       <div className="flex flex-col font-bold text-[#aaaaaa]">
-        <button className="border-b border-[#aaaaaa] py-2">PL</button>
-        <button className="py-2">EN</button>
+        <button
+          type="button"
+          onClick={() => handleLocaleChange("pl")}
+          aria-pressed={locale === "pl"}
+          className={`cursor-pointer border-b border-[#aaaaaa] py-2 ${locale === "pl" ? "text-[#222222]" : ""}`}
+        >
+          PL
+        </button>
+        <button
+          type="button"
+          onClick={() => handleLocaleChange("en")}
+          aria-pressed={locale === "en"}
+          className={`cursor-pointer py-2 ${locale === "en" ? "text-[#222222]" : ""}`}
+        >
+          EN
+        </button>
       </div>
     </header>
   );

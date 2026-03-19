@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import IconRightArrow from "../icons/IconRightArrow";
-import IconLeftArrow from "../icons/IconLeftArrow";
+import IconRightArrow from "../../icons/IconRightArrow";
+import IconLeftArrow from "../../icons/IconLeftArrow";
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

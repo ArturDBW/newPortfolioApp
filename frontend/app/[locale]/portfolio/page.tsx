@@ -1,9 +1,10 @@
 "use client";
 
+import { Link, useRouter } from "@/app/i18n/navigation";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
-import DetailsButton from "../components/DetailsButton";
-import { useRouter } from "next/navigation";
+import DetailsButton from "../../components/DetailsButton";
+import projectsData from "../../../projectsData.json";
 
 export default function Page() {
   const router = useRouter();
@@ -11,32 +12,15 @@ export default function Page() {
   const liStyles =
     "group relative cursor-pointer transition-transform duration-500 before:absolute before:top-1/2 before:right-full before:mr-2 before:h-px before:w-4 before:-translate-y-1/2 before:bg-[#8A6B0C] before:opacity-0 before:transition-opacity before:duration-300 before:content-[''] hover:translate-x-6 hover:before:opacity-100";
 
-  const items = [
-    {
-      id: 1,
-      title: "Turnadon",
-      desc: "Dynamic advertising posters",
-      image: "/img/mountain1.jpg",
-    },
-    {
-      id: 2,
-      title: "Turnadon",
-      desc: "Dynamic advertising posters",
-      image: "/img/mountain2.jpg",
-    },
-    {
-      id: 3,
-      title: "Turnadon",
-      desc: "Dynamic advertising posters",
-      image: "/img/mountain3.jpg",
-    },
-  ];
-
-  const [activeImage, setActiveImage] = useState(items[0].image);
+  const [activeImage, setActiveImage] = useState(projectsData[0].images[0]);
   const [showGreyWipe, setShowGreyWipe] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState(false);
   const timeoutsRef = useRef<number[]>([]);
   const navigationTimeoutRef = useRef<number | null>(null);
+  const activeProject =
+    projectsData.find((project) => project.images[0] === activeImage) ??
+    projectsData[0];
+  const activeProjectHref = `/portfolio/${activeProject.slug}`;
 
   const clearAllTimeouts = () => {
     timeoutsRef.current.forEach((t) => clearTimeout(t));
@@ -62,13 +46,22 @@ export default function Page() {
     timeoutsRef.current.push(t1, t2);
   };
 
-  const handleImageClick = () => {
+  const handleNavigateWithAnimation = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    e.preventDefault();
+
     if (fullscreenImage) return; // blokada wielokrotnego kliku
 
     setFullscreenImage(true);
 
+    if (navigationTimeoutRef.current) {
+      clearTimeout(navigationTimeoutRef.current);
+    }
+
     navigationTimeoutRef.current = window.setTimeout(() => {
-      router.push("/portfolio/test");
+      router.push(href);
     }, 2000);
   };
 
@@ -97,30 +90,38 @@ export default function Page() {
             className={`${fullscreenImage ? "opacity-0" : "opacity-100"} transition-opacity duration-500`}
           >
             <ul className="space-y-10 text-[#011933]">
-              {items.map((item) => {
-                const isActive = item.image === activeImage;
+              {projectsData.map((project) => {
+                const isActive = project.images[0] === activeImage;
+                const projectHref = `/portfolio/${project.slug}`;
                 return (
                   <li
-                    key={item.id}
+                    key={project.id}
                     className={`${liStyles} ${
                       isActive ? "translate-x-6 before:opacity-100" : ""
                     } fade-in-right`}
-                    onMouseEnter={() => changeImage(item.image)}
+                    onMouseEnter={() => changeImage(project.images[0])}
                   >
-                    <span
-                      className={`mr-3 text-xl transition-all group-hover:text-[#8A6B0C] ${
-                        isActive ? "text-[#8A6B0C]" : ""
-                      }`}
+                    <Link
+                      href={projectHref}
+                      onClick={(e) =>
+                        handleNavigateWithAnimation(e, projectHref)
+                      }
                     >
-                      {item.title}
-                    </span>
-                    <span
-                      className={`text-lg text-[#aaa] transition-all group-hover:text-[#8d8d8d] ${
-                        isActive ? "text-[#8d8d8d]" : ""
-                      }`}
-                    >
-                      {item.desc}
-                    </span>
+                      <span
+                        className={`mr-3 text-xl transition-all group-hover:text-[#8A6B0C] ${
+                          isActive ? "text-[#8A6B0C]" : ""
+                        }`}
+                      >
+                        {project.title}
+                      </span>
+                      <span
+                        className={`text-lg text-[#aaa] transition-all group-hover:text-[#8d8d8d] ${
+                          isActive ? "text-[#8d8d8d]" : ""
+                        }`}
+                      >
+                        {project.description}
+                      </span>
+                    </Link>
                   </li>
                 );
               })}
@@ -134,25 +135,27 @@ export default function Page() {
             fullscreenImage ? "w-full" : "w-[60%]"
           }`}
         >
-          <div
-            onClick={handleImageClick}
-            className="group relative h-full w-full overflow-hidden"
-          >
+          <div className="group relative h-full w-full overflow-hidden">
             <div
               className={`absolute inset-0 z-10 bg-gray-50 transition-transform duration-350 ${
                 showGreyWipe ? "translate-x-0" : "-translate-x-full"
               }`}
             />
-
-            <Image
-              src={activeImage}
-              alt=""
-              fill
-              priority
-              className={`cursor-pointer object-cover transition-transform duration-2000 ease-out ${
-                fullscreenImage ? "" : "group-hover:scale-105"
-              }`}
-            />
+            <Link
+              href={activeProjectHref}
+              onClick={(e) => handleNavigateWithAnimation(e, activeProjectHref)}
+              className="block h-full w-full"
+            >
+              <Image
+                src={activeImage}
+                alt=""
+                fill
+                priority
+                className={`cursor-pointer object-cover transition-transform duration-2000 ease-out ${
+                  fullscreenImage ? "" : "group-hover:scale-105"
+                }`}
+              />
+            </Link>
 
             {/* Tutaj ukrywamy przycisk DetailsButton, jeśli jesteśmy w fullscreen */}
             <div
