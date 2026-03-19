@@ -4,40 +4,23 @@ import { Link, useRouter } from "@/app/i18n/navigation";
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 import DetailsButton from "../../components/DetailsButton";
+import projectsData from "../../../projectsData.json";
 
 export default function Page() {
   const router = useRouter();
-  const projectHref = "/portfolio/test" as const;
 
   const liStyles =
     "group relative cursor-pointer transition-transform duration-500 before:absolute before:top-1/2 before:right-full before:mr-2 before:h-px before:w-4 before:-translate-y-1/2 before:bg-[#8A6B0C] before:opacity-0 before:transition-opacity before:duration-300 before:content-[''] hover:translate-x-6 hover:before:opacity-100";
 
-  const items = [
-    {
-      id: 1,
-      title: "Turnadon",
-      desc: "Dynamic advertising posters",
-      image: "/img/mountain1.jpg",
-    },
-    {
-      id: 2,
-      title: "Turnadon",
-      desc: "Dynamic advertising posters",
-      image: "/img/mountain2.jpg",
-    },
-    {
-      id: 3,
-      title: "Turnadon",
-      desc: "Dynamic advertising posters",
-      image: "/img/mountain3.jpg",
-    },
-  ];
-
-  const [activeImage, setActiveImage] = useState(items[0].image);
+  const [activeImage, setActiveImage] = useState(projectsData[0].images[0]);
   const [showGreyWipe, setShowGreyWipe] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState(false);
   const timeoutsRef = useRef<number[]>([]);
   const navigationTimeoutRef = useRef<number | null>(null);
+  const activeProject =
+    projectsData.find((project) => project.images[0] === activeImage) ??
+    projectsData[0];
+  const activeProjectHref = `/portfolio/${activeProject.slug}`;
 
   const clearAllTimeouts = () => {
     timeoutsRef.current.forEach((t) => clearTimeout(t));
@@ -107,15 +90,16 @@ export default function Page() {
             className={`${fullscreenImage ? "opacity-0" : "opacity-100"} transition-opacity duration-500`}
           >
             <ul className="space-y-10 text-[#011933]">
-              {items.map((item) => {
-                const isActive = item.image === activeImage;
+              {projectsData.map((project) => {
+                const isActive = project.images[0] === activeImage;
+                const projectHref = `/portfolio/${project.slug}`;
                 return (
                   <li
-                    key={item.id}
+                    key={project.id}
                     className={`${liStyles} ${
                       isActive ? "translate-x-6 before:opacity-100" : ""
                     } fade-in-right`}
-                    onMouseEnter={() => changeImage(item.image)}
+                    onMouseEnter={() => changeImage(project.images[0])}
                   >
                     <Link
                       href={projectHref}
@@ -128,14 +112,14 @@ export default function Page() {
                           isActive ? "text-[#8A6B0C]" : ""
                         }`}
                       >
-                        {item.title}
+                        {project.title}
                       </span>
                       <span
                         className={`text-lg text-[#aaa] transition-all group-hover:text-[#8d8d8d] ${
                           isActive ? "text-[#8d8d8d]" : ""
                         }`}
                       >
-                        {item.desc}
+                        {project.description}
                       </span>
                     </Link>
                   </li>
@@ -158,8 +142,8 @@ export default function Page() {
               }`}
             />
             <Link
-              href={projectHref}
-              onClick={(e) => handleNavigateWithAnimation(e, projectHref)}
+              href={activeProjectHref}
+              onClick={(e) => handleNavigateWithAnimation(e, activeProjectHref)}
               className="block h-full w-full"
             >
               <Image

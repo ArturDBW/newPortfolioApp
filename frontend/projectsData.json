@@ -1,0 +1,63 @@
+[
+  {
+    "id": 1,
+    "title": "SkillSphere",
+    "slug": "skillsphere",
+    "previousProjectSlug": "audiophile-shop",
+    "nextProjectSlug": "personal-finance-app",
+    "description": "e-learning platform",
+    "images": [
+      "/img/skillSphere/skillsphere1.png",
+      "/img/skillSphere/skillsphere2.png",
+      "/img/skillSphere/skillsphere3.png",
+      "/img/skillSphere/skillsphere4.png",
+      "/img/skillSphere/skillsphere5.png",
+      "/img/skillSphere/skillsphere6.png",
+      "/img/skillSphere/skillsphere7.png",
+      "/img/skillSphere/skillsphere8.png"
+    ],
+    "githubLink": "https://github.com/username/personal-finance-app",
+    "projectLink": "https://personal-finance-app.example.com",
+    "darkMode": false
+  },
+  {
+    "id": 2,
+    "title": "Personal Finance App",
+    "slug": "personal-finance-app",
+    "previousProjectSlug": "skillsphere",
+    "nextProjectSlug": "audiophile-shop",
+    "description": "financial assistant",
+    "images": [
+      "/img/personalFinanceApp/personalfinanceapp1.png",
+      "/img/personalFinanceApp/personalfinanceapp2.png",
+      "/img/personalFinanceApp/personalfinanceapp3.png",
+      "/img/personalFinanceApp/personalfinanceapp4.png",
+      "/img/personalFinanceApp/personalfinanceapp5.png",
+      "/img/personalFinanceApp/personalfinanceapp6.png",
+      "/img/personalFinanceApp/personalfinanceapp7.png"
+    ],
+    "githubLink": "https://github.com/username/personal-finance-app",
+    "projectLink": "https://personal-finance-app.example.com",
+    "darkMode": true
+  },
+  {
+    "id": 3,
+    "title": "Audiophile Shop",
+    "slug": "audiophile-shop",
+    "previousProjectSlug": "personal-finance-app",
+    "nextProjectSlug": "skillsphere",
+    "description": "e-commerce",
+    "images": [
+      "/img/audiophileShop/audiophileshop1.png",
+      "/img/audiophileShop/audiophileshop2.png",
+      "/img/audiophileShop/audiophileshop3.png",
+      "/img/audiophileShop/audiophileshop4.png",
+      "/img/audiophileShop/audiophileshop5.png",
+      "/img/audiophileShop/audiophileshop6.png",
+      "/img/audiophileShop/audiophileshop7.png"
+    ],
+    "githubLink": "https://github.com/username/personal-finance-app",
+    "projectLink": "https://personal-finance-app.example.com",
+    "darkMode": false
+  }
+]
