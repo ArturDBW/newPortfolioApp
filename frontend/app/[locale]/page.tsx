@@ -12,8 +12,8 @@ export default function Home() {
             Artur Wiśniewski
           </div>
           <div className="slide-down-animation relative flex -translate-y-25 space-x-4 before:absolute before:top-1/2 before:right-26 before:h-px before:w-6 before:-translate-y-1/2 before:bg-[#e6e6e6] before:content-['']">
-            <IconGitHub />
-            <IconLinkedin />
+            <IconGitHub bgColor={"#fff"} size={"20px"} />
+            <IconLinkedin bgColor={"#fff"} size={"20px"} />
           </div>
         </div>
         <div className="ml-24">

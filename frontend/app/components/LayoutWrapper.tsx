@@ -5,6 +5,7 @@ import { useRouter, usePathname } from "@/app/i18n/navigation";
 import type { Locale } from "@/app/i18n/routing";
 import { useLocale } from "next-intl";
 import Header from "./Header";
+import BurgerMenu from "./BurgerMenu";
 
 export default function RootLayout({
   children,
@@ -15,6 +16,7 @@ export default function RootLayout({
   const pathname = usePathname();
   const locale = useLocale();
   const [isClosingAnimation, setIsClosingAnimation] = useState(false);
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
   const handleNavigation = (href: string) => {
     if (isClosingAnimation) return;
@@ -36,13 +38,29 @@ export default function RootLayout({
   };
 
   useEffect(() => {
-    // Resetujemy overlay dopiero po zakończonej nawigacji (zmiana ścieżki lub locale).
+    // Resetujemy overlay dopiej po zakończonej nawigacji (zmiana ścieżki lub locale).
     const timeout = setTimeout(() => {
       setIsClosingAnimation(false);
     }, 100);
 
     return () => clearTimeout(timeout);
   }, [pathname, locale]);
+
+  const handleCloseBurgerMenu = () => {
+    setIsBurgerMenuOpen(false);
+  };
+
+  useEffect(() => {
+    if (isBurgerMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isBurgerMenuOpen]);
 
   return (
     <>
@@ -52,7 +70,16 @@ export default function RootLayout({
       <Header
         onNavigate={handleNavigation}
         onLocaleChange={handleLocaleChange}
+        onBurgerMenuOpen={() => setIsBurgerMenuOpen(true)}
+        isBurgerMenuOpen={isBurgerMenuOpen}
       />
+      {isBurgerMenuOpen && (
+        <BurgerMenu
+          onNavigate={handleNavigation}
+          onLocaleChange={handleLocaleChange}
+          onClose={handleCloseBurgerMenu}
+        />
+      )}
       {children}
     </>
   );

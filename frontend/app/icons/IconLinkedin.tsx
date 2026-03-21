@@ -1,8 +1,14 @@
-export default function IconLinkedin() {
+export default function IconLinkedin({
+  bgColor,
+  size,
+}: {
+  bgColor: string;
+  size: string;
+}) {
   return (
     <svg
-      width="26px"
-      height="26px"
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +27,7 @@ export default function IconLinkedin() {
         <g
           id="Dribbble-Light-Preview"
           transform="translate(-180.000000, -7479.000000)"
-          fill="#fff"
+          fill={bgColor}
         >
           <g id="icons" transform="translate(56.000000, 160.000000)">
             <path
