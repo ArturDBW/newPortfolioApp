@@ -32,7 +32,7 @@ export default function BurgerMenu({
   ) => {
     e.preventDefault(); // blokujemy natychmiastowy navigation
     onNavigate(href); // next-intl router sam dodaje aktualny prefiks locale
-    onClose(); // Zamykamy menu po kliknięciu linku
+    setTimeout(onClose, 2000); // Zamykamy menu po zakończeniu animacji nawigacji
   };
 
   const linkClass = (href: string) =>
@@ -45,7 +45,7 @@ export default function BurgerMenu({
   };
 
   return (
-    <div className="absolute top-0 left-0 z-3 flex h-screen w-full flex-col items-center justify-between bg-white p-10 max-md:p-5">
+    <div className="absolute top-0 left-0 z-7 flex h-screen w-full flex-col items-center justify-between bg-white p-10 max-sm:p-5">
       <div className="items-between flex w-full justify-between">
         <div className="flex items-center space-x-2 text-lg">
           <button
@@ -68,7 +68,7 @@ export default function BurgerMenu({
         </div>
         <button
           onClick={onClose}
-          className="tra cursor-pointer rounded-lg p-1 transition-all duration-350 hover:scale-120 hover:rotate-270"
+          className="tra cursor-pointer rounded-lg p-2 transition-all duration-350 hover:scale-120 hover:rotate-270"
         >
           <IconClose />
         </button>

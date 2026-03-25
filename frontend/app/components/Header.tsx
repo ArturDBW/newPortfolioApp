@@ -21,6 +21,8 @@ export default function Header({
 }: Props) {
   const pathname = usePathname();
   const locale = useLocale();
+  const isHomeRoute =
+    pathname === "/" || pathname === "" || pathname === "/home";
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -51,12 +53,12 @@ export default function Header({
       {!isBurgerMenuOpen && (
         <button
           onClick={onBurgerMenuOpen}
-          className="fixed top-5 right-5 z-50 cursor-pointer rounded-lg p-2 transition-all duration-350 hover:scale-120 md:hidden"
+          className="fixed top-10 right-10 z-5 cursor-pointer rounded-lg p-2 transition-all duration-350 hover:scale-120 max-sm:top-5 max-sm:right-5 lg:hidden"
         >
-          <IconHamburger />
+          <IconHamburger fillColor={isHomeRoute ? "#ffffff" : "#000000"} />
         </button>
       )}
-      <header className="sticky top-0 left-0 z-10 flex h-screen w-25 flex-col items-center justify-between border-r border-[#e6e6e6] bg-white py-12 text-[#011933] max-md:hidden">
+      <header className="sticky top-0 left-0 z-10 flex h-screen w-25 flex-col items-center justify-between border-r border-[#e6e6e6] bg-white py-12 text-[#011933] max-lg:hidden">
         <Link href={"/"}>
           <div className="text-3xl font-bold">dBw</div>
         </Link>

@@ -21,7 +21,7 @@ export default function Page() {
       <div className="white-wipe-out" />
       <div className="flex min-h-screen w-full">
         <div className="flex-3 bg-white">
-          <div className="slide-up-animation-2s translate-y-25 border-b border-[#e6e6e6] px-25 py-30 opacity-0 max-xl:px-10 max-md:py-10 max-sm:p-5">
+          <div className="slide-up-animation-2s translate-y-25 border-b border-[#e6e6e6] px-25 py-30 opacity-0 max-xl:px-10 max-lg:py-10 max-sm:p-5">
             <h2 className="text-5xl font-bold tracking-wider text-[#011933] max-md:text-4xl">
               Technologies
             </h2>

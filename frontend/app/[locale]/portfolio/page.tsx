@@ -15,6 +15,8 @@ export default function Page() {
   const [activeImage, setActiveImage] = useState(projectsData[0].images[0]);
   const [showGreyWipe, setShowGreyWipe] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState(false);
+  const [showWhiteWipeIn, setShowWhiteWipeIn] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
   const timeoutsRef = useRef<number[]>([]);
   const navigationTimeoutRef = useRef<number | null>(null);
   const activeProject =
@@ -49,12 +51,25 @@ export default function Page() {
   const handleNavigateWithAnimation = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
+    options?: {
+      useFullscreen?: boolean;
+      withWhiteWipeIn?: boolean;
+      delayMs?: number;
+    },
   ) => {
     e.preventDefault();
 
-    if (fullscreenImage) return; // blokada wielokrotnego kliku
+    if (isNavigating) return; // blokada wielokrotnego kliku
 
-    setFullscreenImage(true);
+    setIsNavigating(true);
+
+    if (options?.withWhiteWipeIn) {
+      setShowWhiteWipeIn(true);
+    }
+
+    if (options?.useFullscreen ?? true) {
+      setFullscreenImage(true);
+    }
 
     if (navigationTimeoutRef.current) {
       clearTimeout(navigationTimeoutRef.current);
@@ -62,7 +77,7 @@ export default function Page() {
 
     navigationTimeoutRef.current = window.setTimeout(() => {
       router.push(href);
-    }, 2000);
+    }, options?.delayMs ?? 2000);
   };
 
   useEffect(() => {
@@ -77,8 +92,10 @@ export default function Page() {
   return (
     <>
       <div className="white-wipe-out" />
+      {showWhiteWipeIn && <div className="white-wipe-in" />}
       {/* Dodano h-screen i overflow-hidden do głównego kontenera */}
-      <div className="flex h-screen w-full overflow-hidden bg-white">
+
+      <div className="hidden h-screen w-full overflow-hidden bg-white lg:flex">
         {/* LEWA STRONA - Płynnie zwija się do szerokości 0 */}
         <div
           className={`flex flex-col items-center justify-center overflow-hidden bg-white transition-all duration-2000 ease-in-out ${
@@ -165,6 +182,54 @@ export default function Page() {
             </div>
             <div className="grey-wipe-out" />
           </div>
+        </div>
+      </div>
+
+      {/* RWD <= 1024px */}
+
+      <div className="min-h-screen w-full bg-white p-10 text-[#011933] max-sm:p-5 lg:hidden">
+        <div className="flex items-center justify-between">
+          <h3 className="mb-10 ml-2 text-2xl max-sm:text-lg">
+            A section of the projects
+          </h3>
+        </div>
+        <div className="flex flex-col gap-y-10">
+          {projectsData.map((project) => {
+            const projectHref = `/portfolio/${project.slug}`;
+            return (
+              <div key={project.id}>
+                <Link
+                  href={projectHref}
+                  onClick={(e) =>
+                    handleNavigateWithAnimation(e, projectHref, {
+                      useFullscreen: false,
+                      withWhiteWipeIn: true,
+                      delayMs: 2000,
+                    })
+                  }
+                  className="flex flex-col gap-4 rounded-xl border border-[#e6edf4] p-4 shadow-sm"
+                >
+                  <div className="relative h-56 w-full overflow-hidden rounded-lg">
+                    <Image
+                      src={project.images[0]}
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <h4 className="text-xl font-bold tracking-wide">
+                    {project.title}
+                  </h4>
+                  <p className="text-base text-[#4a5d75]">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Animi porro perferendis explicabo nulla iure, tempora ea
+                    natus minima alias quas commodi necessitatibus adipisci vero
+                    vitae asperiores! Totam incidunt eos aspernatur?
+                  </p>
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
