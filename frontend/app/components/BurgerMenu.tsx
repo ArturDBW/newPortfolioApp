@@ -1,6 +1,6 @@
 import { Link, usePathname } from "@/app/i18n/navigation";
 import { useLocale } from "next-intl";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import type { Locale } from "@/app/i18n/routing";
 import IconGitHub from "../icons/IconGitHub";
 import IconLinkedin from "../icons/IconLinkedin";
@@ -53,13 +53,29 @@ export default function BurgerMenu({
     onLocaleChange(nextLocale);
   };
 
-  const handleCloseButton = () => {
+  const handleCloseButton = useCallback(() => {
+    if (showCloseWipe || isClosing) return;
+
     setShowCloseWipe(true);
     setTimeout(() => {
       setIsClosing(true);
     }, 1200);
     setTimeout(onClose, 2200);
-  };
+  }, [isClosing, onClose, showCloseWipe]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handleCloseButton();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleCloseButton]);
 
   return (
     <div

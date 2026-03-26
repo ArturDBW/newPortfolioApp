@@ -79,7 +79,7 @@ body {
   animation: wipeIn 1.8s ease-in forwards;
 }
 
-/* Open for burgerMenu */
+/* Animations for burgerMenu */
 
 @keyframes wipeInBurgerMenu {
   from {
