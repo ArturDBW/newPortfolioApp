@@ -79,6 +79,46 @@ body {
   animation: wipeIn 1.8s ease-in forwards;
 }
 
+/* Open for burgerMenu */
+
+@keyframes wipeInBurgerMenu {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes wipeOutBurgerMenu {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.white-wipe-in-burgerMenu {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  transform-origin: right;
+  background: #fff;
+  animation: wipeInBurgerMenu 1.2s ease-in forwards 0.4s;
+}
+
+.white-wipe-out-burgerMenu {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  transform-origin: right;
+  background: #fff;
+  animation: wipeOutBurgerMenu 1.2s ease-in forwards;
+}
+
 /*  -------------------------------------------------------------------- */
 
 @keyframes wipeOut {

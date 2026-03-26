@@ -50,18 +50,6 @@ export default function RootLayout({
     setIsBurgerMenuOpen(false);
   };
 
-  useEffect(() => {
-    if (isBurgerMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isBurgerMenuOpen]);
-
   return (
     <>
       <div

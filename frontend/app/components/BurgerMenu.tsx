@@ -1,5 +1,6 @@
 import { Link, usePathname } from "@/app/i18n/navigation";
 import { useLocale } from "next-intl";
+import { useState, useEffect } from "react";
 import type { Locale } from "@/app/i18n/routing";
 import IconGitHub from "../icons/IconGitHub";
 import IconLinkedin from "../icons/IconLinkedin";
@@ -18,6 +19,14 @@ export default function BurgerMenu({
 }: Props) {
   const pathname = usePathname();
   const locale = useLocale();
+  const [isEntering, setIsEntering] = useState(true);
+  const [isClosing, setIsClosing] = useState(false);
+  const [showCloseWipe, setShowCloseWipe] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsEntering(false), 10);
+    return () => clearTimeout(timer);
+  }, []);
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -44,8 +53,29 @@ export default function BurgerMenu({
     onLocaleChange(nextLocale);
   };
 
+  const handleCloseButton = () => {
+    setShowCloseWipe(true);
+    setTimeout(() => {
+      setIsClosing(true);
+    }, 1200);
+    setTimeout(onClose, 2200);
+  };
+
   return (
-    <div className="absolute top-0 left-0 z-7 flex h-screen w-full flex-col items-center justify-between bg-white p-10 max-sm:p-5">
+    <div
+      className="fixed top-0 left-0 z-7 flex h-screen w-full flex-col items-center justify-between bg-white p-10 transition-transform duration-1000 ease-out max-sm:p-5"
+      style={{
+        transform: isClosing
+          ? "translateX(100%)"
+          : isEntering
+            ? "translateX(100%)"
+            : "translateX(0)",
+      }}
+    >
+      <div className="white-wipe-in-burgerMenu absolute inset-0 z-10 bg-white" />
+      {showCloseWipe && (
+        <div className="white-wipe-out-burgerMenu absolute inset-0 z-20 bg-white" />
+      )}
       <div className="items-between flex w-full justify-between">
         <div className="flex items-center space-x-2 text-lg">
           <button
@@ -67,7 +97,7 @@ export default function BurgerMenu({
           </button>
         </div>
         <button
-          onClick={onClose}
+          onClick={handleCloseButton}
           className="tra cursor-pointer rounded-lg p-2 transition-all duration-350 hover:scale-120 hover:rotate-270"
         >
           <IconClose />
