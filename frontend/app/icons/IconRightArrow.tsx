@@ -1,4 +1,4 @@
-export default function IconRightArrow() {
+export default function IconRightArrow({ darkmode }: { darkmode: boolean }) {
   return (
     <svg
       width="80px"
@@ -10,7 +10,7 @@ export default function IconRightArrow() {
     >
       <path
         d="M256 120.768L306.432 64 768 512l-461.568 448L256 903.232 659.072 512z"
-        className="fill-white/40 transition-all duration-300 group-hover:fill-white"
+        className={`transition-all duration-300 ${darkmode ? "fill-[#0f172a]/40 group-hover:fill-[#0f172a]" : "fill-white/40 group-hover:fill-white"}`}
       />
     </svg>
   );

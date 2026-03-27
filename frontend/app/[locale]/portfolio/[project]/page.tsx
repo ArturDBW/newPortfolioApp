@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import { useRouter, Link } from "@/app/i18n/navigation";
 import IconLeftArrow from "@/app/icons/IconLeftArrow";
 import IconRightArrow from "@/app/icons/IconRightArrow";
 import projectsData from "../../../../projectsData.json";
@@ -23,10 +24,20 @@ type Project = {
 export default function Page() {
   const params = useParams<{ project: string }>();
   const projectSlug = params?.project;
+  const router = useRouter();
 
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showWelcomeText, setShowWelcomeText] = useState(true);
+  const [isNavigating, setIsNavigating] = useState(false);
+
+  const handleNavigateWithAnimation = (href: string) => {
+    if (isNavigating) return;
+    setIsNavigating(true);
+    setTimeout(() => {
+      router.push(href);
+    }, 1800);
+  };
 
   const project = (projectsData as Project[]).find(
     (projectItem) => projectItem.slug === projectSlug,
@@ -101,13 +112,13 @@ export default function Page() {
         onClick={prevSlide}
         className={isDarkMode ? "text-[#0f172a]" : "text-white"}
       >
-        <IconLeftArrow />
+        <IconLeftArrow darkmode={isDarkMode} />
       </button>
       <button
         onClick={nextSlide}
         className={isDarkMode ? "text-[#0f172a]" : "text-white"}
       >
-        <IconRightArrow />
+        <IconRightArrow darkmode={isDarkMode} />
       </button>
       <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-3">
         {projectImages.map((_, index) => (
@@ -160,6 +171,17 @@ export default function Page() {
           Visit on github
         </a>
       </div>
+      {isNavigating && <div className="white-wipe-in" />}
+      <Link
+        href={`/portfolio/${project.nextProjectSlug}`}
+        onClick={(e) => {
+          e.preventDefault();
+          handleNavigateWithAnimation(`/portfolio/${project.nextProjectSlug}`);
+        }}
+        className={`widest absolute right-1/2 bottom-15 translate-x-1/2 transform cursor-pointer rounded px-4 py-2 text-sm uppercase transition-all hover:bottom-16 ${isDarkMode ? "text-[#0f172a] hover:text-black" : "text-[#eee] hover:text-white"}`}
+      >
+        Next project
+      </Link>
     </div>
   );
 }
