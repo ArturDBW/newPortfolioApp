@@ -12,8 +12,15 @@ export default function Home() {
             Artur Wiśniewski
           </div>
           <div className="slide-down-animation relative flex -translate-y-25 space-x-4 before:absolute before:top-1/2 before:right-26 before:h-px before:w-6 before:-translate-y-1/2 before:bg-[#e6e6e6] before:content-[''] max-md:before:w-0">
-            <IconGitHub bgColor={"#fff"} size={"20px"} />
-            <IconLinkedin bgColor={"#fff"} size={"20px"} />
+            <a target="_blank" href="https://github.com/ArturDBW">
+              <IconGitHub bgColor={"#fff"} size={"20px"} />
+            </a>
+            <a
+              target="_blank"
+              href="https://www.linkedin.com/in/artur-wi%C5%9Bniewski-4045041b8/"
+            >
+              <IconLinkedin bgColor={"#fff"} size={"20px"} />
+            </a>
           </div>
         </div>
         <div className="mt-10 ml-24 max-xl:ml-6 max-lg:self-start max-md:mx-auto">
