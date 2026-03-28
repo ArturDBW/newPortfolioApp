@@ -7,6 +7,7 @@ import { useRouter, Link } from "@/app/i18n/navigation";
 import IconLeftArrow from "@/app/icons/IconLeftArrow";
 import IconRightArrow from "@/app/icons/IconRightArrow";
 import projectsData from "../../../../projectsData.json";
+import { useTranslations } from "next-intl";
 
 type Project = {
   id: number;
@@ -22,6 +23,8 @@ type Project = {
 };
 
 export default function Page() {
+  const t = useTranslations("projects");
+
   const params = useParams<{ project: string }>();
   const projectSlug = params?.project;
   const router = useRouter();
@@ -152,8 +155,7 @@ export default function Page() {
         <p
           className={`slide-up-animation-05s mt-8 mb-10 w-160 translate-y-25 text-xl opacity-0 max-lg:w-100 max-lg:text-lg max-md:text-base max-sm:w-40 ${isDarkMode ? "text-[#1f2937]" : "text-white max-sm:text-xs"}`}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          {t(`${project.slug}.description`)}
         </p>
 
         <a

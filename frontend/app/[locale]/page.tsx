@@ -1,8 +1,11 @@
+import { useTranslations } from "next-intl";
 import IconGitHub from "../icons/IconGitHub";
 import IconLinkedin from "../icons/IconLinkedin";
 import Spline from "@splinetool/react-spline";
 
 export default function Home() {
+  const t = useTranslations("About");
+
   return (
     <>
       <div className="white-wipe-out" />
@@ -36,10 +39,7 @@ export default function Home() {
             &nbsp;
           </div>
           <p className="slide-up-animation-4s ml-24 w-160 translate-y-25 opacity-0 max-2xl:w-100 max-md:ml-auto max-sm:w-auto max-sm:text-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi enim
-            voluptate, itaque saepe commodi rerum a eius, quis error labore,{" "}
-            accusantium obcaecati reprehenderit animi tempore sequi laudantium
-            non quasi aspernatur.
+            {t("aboutMe")}
           </p>
         </div>
         <div className="slide-up-animation-4s translate-y-25 overflow-hidden text-xl max-lg:mt-auto">

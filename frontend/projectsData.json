@@ -16,8 +16,8 @@
       "/img/skillSphere/skillsphere7.png",
       "/img/skillSphere/skillsphere8.png"
     ],
-    "githubLink": "https://github.com/username/personal-finance-app",
-    "projectLink": "https://personal-finance-app.example.com",
+    "githubLink": "https://github.com/ArturDBW/SkillSphereApp",
+    "projectLink": "https://skill-sphere-app-frontend.vercel.app/",
     "darkMode": false
   },
   {
@@ -36,8 +36,8 @@
       "/img/personalFinanceApp/personalfinanceapp6.png",
       "/img/personalFinanceApp/personalfinanceapp7.png"
     ],
-    "githubLink": "https://github.com/username/personal-finance-app",
-    "projectLink": "https://personal-finance-app.example.com",
+    "githubLink": "https://github.com/ArturDBW/personalFinanceApp",
+    "projectLink": "https://personal-finance-app-two-kohl.vercel.app",
     "darkMode": true
   },
   {
@@ -56,8 +56,8 @@
       "/img/audiophileShop/audiophileshop6.png",
       "/img/audiophileShop/audiophileshop7.png"
     ],
-    "githubLink": "https://github.com/username/personal-finance-app",
-    "projectLink": "https://personal-finance-app.example.com",
+    "githubLink": "https://github.com/ArturDBW/audiophileShop",
+    "projectLink": "https://audiophileshopapp.vercel.app/",
     "darkMode": false
   }
 ]
