@@ -20,6 +20,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Artur Wiśniewski - Frontend Developer",
   description: "Artur Wiśniewski - Frontend Developer portfolio",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default async function RootLayout({
