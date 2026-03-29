@@ -1,0 +1,11 @@
+{
+  "skillsphere": {
+    "description": "Fullstackowa aplikacja e-learningowa zbudowana w Next.js, Node.js i MongoDB. Umożliwia użytkownikom tworzenie kursów, śledzenie postępów i interakcję z materiałami edukacyjnymi w czasie rzeczywistym."
+  },
+  "personal-finance-app": {
+    "description": "Fullstackowa aplikacja, która pomaga użytkownikom zarządzać swoimi finansami osobistymi, zbudowana w Next.js, Node.js i MongoDB. Pozwala na tworzenie budżetów, monitorowanie wydatków oraz wspomaga oszczędzanie pieniędzy dzięki intuicyjnemu interfejsowi."
+  },
+  "audiophile-shop": {
+    "description": "Frontendowy sklep internetowy zbudowany w React oferujący szeroki wybór sprzętu audio wysokiej jakości. Użytkownicy mogą przeglądać produkty, dodawać je do koszyka i dokonywać płatności w intuicyjnym interfejsie."
+  }
+}

@@ -160,8 +160,15 @@ export default function BurgerMenu({
           </div>
         </div>
         <div className="flex items-center space-x-4 before:absolute before:top-1/2 before:right-21 before:h-[0.1px] before:w-8 before:-translate-y-1/2 before:bg-[#011933] before:content-[''] max-sm:before:w-0">
-          <IconGitHub bgColor={"#011933"} size={"20px"} />
-          <IconLinkedin bgColor={"#011933"} size={"20px"} />
+          <a target="_blank" href="https://github.com/ArturDBW">
+            <IconGitHub bgColor={"#011933"} size={"20px"} />
+          </a>
+          <a
+            target="_blank"
+            href="https://www.linkedin.com/in/artur-wi%C5%9Bniewski-4045041b8/"
+          >
+            <IconLinkedin bgColor={"#011933"} size={"20px"} />
+          </a>
         </div>
       </div>
     </div>

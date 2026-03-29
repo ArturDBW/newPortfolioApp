@@ -1,5 +1,10 @@
 {
+  "About": {
+    "title": "Cześć",
+    "aboutMe": "Jestem frontend developerem z kilkuletnim doświadczeniem w tworzeniu własnych projektów webowych. Specjalizuję się w technologiach takich jak TypeScript i React. Aktualnie kończę studia magisterskie na kierunku Informatyka (specjalizacja Web Development) i szukam pierwszej pracy jako Junior Frontend Developer, w której będę mógł rozwijać swoje umiejętności i pracować przy realnych projektach."
+  },
   "Technologies": {
-    "description": "Technologie po polsku"
+    "description": "Technologie, z których korzystam na co dzień podczas tworzenia projektów frontendowych oraz fullstack — od budowy interfejsów po dbanie o wydajność i jakość kodu. To stack, w którym stale rozwijam swoje umiejętności, realizując własne projekty i eksperymentując z nowymi rozwiązaniami. Właśnie w tych technologiach czuje się najlepiej i to one stanowią podstawę mojej pracy jako frontend developer. Z czasem planuje rozszerzać swoje kompetencje o kolejne technologie, frameworki i biblioteki.",
+    "date": "Zaktualizowano: 10 kwietnia 2026"
   }
 }

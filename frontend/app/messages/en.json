@@ -1,5 +1,10 @@
 {
+  "About": {
+    "title": "Hello",
+    "aboutMe": "I am a frontend developer with several years of experience building personal web projects. I specialize in technologies such as TypeScript and React. I am currently completing my Master's degree in Computer Science (Web Development specialization) and I am looking for my first role as a Junior Frontend Developer, where I can further develop my skills and contribute to real commercial projects."
+  },
   "Technologies": {
-    "description": "Technologies in English"
+    "description": "Technologies I use on a daily basis while building frontend and fullstack projects — from building interfaces to ensuring performance and code quality. This is the stack in which I continuously develop my skills by working on personal projects and experimenting with new solutions. These are the technologies I feel most confident in, and they form the foundation of my work as a frontend developer. Over time, I plan to expand my skill set with additional technologies, frameworks, and libraries.",
+    "date": "Updated: 10 April 2026"
   }
 }

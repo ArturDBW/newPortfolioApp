@@ -26,7 +26,7 @@ export default function Page() {
               Technologies
             </h2>
             <h5 className="mt-5 flex items-center text-sm tracking-widest text-[#8A6B0C] uppercase before:mr-3 before:h-px before:w-6 before:bg-[#8A6B0C] before:content-[''] max-md:text-xs">
-              Updated: 10 February 2026
+              {t("date")}
             </h5>
           </div>
           <div className="border-b border-[#e6e6e6] px-25 py-20 max-xl:px-10 max-md:py-10 max-sm:p-5">
