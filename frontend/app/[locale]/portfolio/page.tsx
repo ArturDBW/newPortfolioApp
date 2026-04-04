@@ -6,29 +6,55 @@ import { useRef, useState, useEffect } from "react";
 import DetailsButton from "../../components/DetailsButton";
 import projectsData from "../../../projectsData.json";
 
+type ProjectImageSet = {
+  desktop: string[];
+  mobile: string[];
+};
+
+type Project = {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  images: ProjectImageSet[];
+};
+
 export default function Page() {
   const router = useRouter();
 
   const liStyles =
     "group relative cursor-pointer transition-transform duration-500 before:absolute before:top-1/2 before:right-full before:mr-2 before:h-px before:w-4 before:-translate-y-1/2 before:bg-[#8A6B0C] before:opacity-0 before:transition-opacity before:duration-300 before:content-[''] hover:translate-x-6 hover:before:opacity-100";
 
-  const [activeImage, setActiveImage] = useState(projectsData[0].images[0]);
+  const projects = projectsData as Project[];
+
+  const [activeProjectSlug, setActiveProjectSlug] = useState(
+    projects[0]?.slug ?? "",
+  );
   const [showGreyWipe, setShowGreyWipe] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState(false);
   const [showWhiteWipeIn, setShowWhiteWipeIn] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
   const timeoutsRef = useRef<number[]>([]);
   const navigationTimeoutRef = useRef<number | null>(null);
+
+  const getProjectPreviewImage = (project: Project) =>
+    project.images[0]?.desktop?.[0] ?? project.images[0]?.mobile?.[0] ?? "";
+
   const activeProject =
-    projectsData.find((project) => project.images[0] === activeImage) ??
-    projectsData[0];
-  const activeProjectHref = `/portfolio/${activeProject.slug}`;
+    projects.find((project) => project.slug === activeProjectSlug) ??
+    projects[0];
+  const activeProjectHref = activeProject
+    ? `/portfolio/${activeProject.slug}`
+    : "/portfolio";
+  const activeImage = activeProject
+    ? getProjectPreviewImage(activeProject)
+    : "";
 
   const clearAllTimeouts = () => {
     timeoutsRef.current.forEach((t) => clearTimeout(t));
     timeoutsRef.current = [];
   };
-  const changeImage = (img: string) => {
+  const changeImage = (projectSlug: string) => {
     // anuluj wszystkie poprzednie timeouty
     clearAllTimeouts();
 
@@ -37,7 +63,7 @@ export default function Page() {
 
     // timeout do zmiany obrazka po wjeździe maski
     const t1 = window.setTimeout(() => {
-      setActiveImage(img);
+      setActiveProjectSlug(projectSlug);
     }, 350); // dopasowane do duration-500
 
     // timeout do wyjazdu maski po ~1s
@@ -107,8 +133,8 @@ export default function Page() {
             className={`${fullscreenImage ? "opacity-0" : "opacity-100"} transition-opacity duration-500`}
           >
             <ul className="space-y-10 text-[#011933]">
-              {projectsData.map((project) => {
-                const isActive = project.images[0] === activeImage;
+              {projects.map((project) => {
+                const isActive = project.slug === activeProject?.slug;
                 const projectHref = `/portfolio/${project.slug}`;
                 return (
                   <li
@@ -116,7 +142,7 @@ export default function Page() {
                     className={`${liStyles} ${
                       isActive ? "translate-x-6 before:opacity-100" : ""
                     } fade-in-right`}
-                    onMouseEnter={() => changeImage(project.images[0])}
+                    onMouseEnter={() => changeImage(project.slug)}
                   >
                     <Link
                       href={projectHref}
@@ -194,7 +220,7 @@ export default function Page() {
           </h3>
         </div>
         <div className="flex flex-col gap-y-10">
-          {projectsData.map((project) => {
+          {projects.map((project) => {
             const projectHref = `/portfolio/${project.slug}`;
             return (
               <div key={project.id}>
@@ -211,9 +237,10 @@ export default function Page() {
                 >
                   <div className="relative h-56 w-full overflow-hidden rounded-lg">
                     <Image
-                      src={project.images[0]}
+                      src={getProjectPreviewImage(project)}
                       alt={project.title}
                       fill
+                      sizes="100vw"
                       className="object-cover"
                     />
                   </div>

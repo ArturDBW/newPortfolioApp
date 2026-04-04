@@ -9,6 +9,11 @@ import IconRightArrow from "@/app/icons/IconRightArrow";
 import projectsData from "../../../../projectsData.json";
 import { useTranslations } from "next-intl";
 
+type ProjectImageSet = {
+  desktop: string[];
+  mobile: string[];
+};
+
 type Project = {
   id: number;
   title: string;
@@ -16,7 +21,7 @@ type Project = {
   previousProjectSlug: string;
   nextProjectSlug: string;
   description: string;
-  images: string[];
+  images: ProjectImageSet[];
   githubLink: string;
   projectLink: string;
   darkMode: boolean;
@@ -29,6 +34,7 @@ export default function Page() {
   const projectSlug = params?.project;
   const router = useRouter();
 
+  const [isDesktop, setIsDesktop] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showWelcomeText, setShowWelcomeText] = useState(true);
@@ -45,7 +51,10 @@ export default function Page() {
   const project = (projectsData as Project[]).find(
     (projectItem) => projectItem.slug === projectSlug,
   );
-  const projectImages = project?.images ?? [];
+  const imageSet = project?.images?.[0];
+  const projectImages = isDesktop
+    ? (imageSet?.desktop ?? [])
+    : (imageSet?.mobile ?? []);
   const imagesCount = projectImages.length;
   const isDarkMode = project?.darkMode === true;
 
@@ -60,6 +69,19 @@ export default function Page() {
     setCurrentIndex((prev) => (prev === imagesCount - 1 ? 0 : prev + 1));
     setShowWelcomeText(false);
   };
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 640px)");
+
+    const updateViewport = () => setIsDesktop(mediaQuery.matches);
+
+    updateViewport();
+    mediaQuery.addEventListener("change", updateViewport);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateViewport);
+    };
+  }, []);
 
   useEffect(() => {
     if (imagesCount === 0) return;
@@ -91,87 +113,90 @@ export default function Page() {
   }
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
-      <div
-        className="flex transition-transform duration-1200"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-      >
-        {projectImages.map((image, index) => (
-          <div
-            key={index}
-            className="relative h-screen w-full shrink-0 overflow-hidden"
-          >
-            <Image
-              src={image}
-              alt={`Slide ${index}`}
-              fill
-              className={`object-cover ${isButtonHovered ? "scale-105" : "scale-100"} transition-transform duration-2000 ease-out group-hover:scale-105`}
-              priority // opcjonalnie, szybciej ładuje pierwsze slajdy
+    <div className="relative flex min-h-svh w-full items-stretch overflow-hidden bg-black lg:block">
+      <div className="relative h-svh w-full lg:h-screen">
+        <div
+          className="flex h-full transition-transform duration-1200"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {projectImages.map((image, index) => (
+            <div
+              key={index}
+              className="relative h-full w-full shrink-0 overflow-hidden"
+            >
+              <Image
+                src={image}
+                alt={`Slide ${index}`}
+                fill
+                className={`object-cover ${isDesktop ? "object-center" : "object-top"} ${isButtonHovered ? "scale-105" : "scale-100"} transition-transform duration-2000 ease-out group-hover:scale-105`}
+                sizes="100vw"
+                priority
+              />
+            </div>
+          ))}
+        </div>
+        <button
+          onClick={prevSlide}
+          className={isDarkMode ? "text-[#0f172a]" : "text-white"}
+        >
+          <IconLeftArrow darkmode={isDarkMode} />
+        </button>
+        <button
+          onClick={nextSlide}
+          className={isDarkMode ? "text-[#0f172a]" : "text-white"}
+        >
+          <IconRightArrow darkmode={isDarkMode} />
+        </button>
+        <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-3">
+          {projectImages.map((_, index) => (
+            <button
+              key={index}
+              className={`h-3 w-3 cursor-pointer rounded-full transition-colors ${
+                isDarkMode
+                  ? index === currentIndex
+                    ? "bg-[#0f172a]"
+                    : "bg-[#0f172a]/40"
+                  : index === currentIndex
+                    ? "bg-white"
+                    : "bg-white/50"
+              }`}
+              onClick={() => {
+                setCurrentIndex(index);
+                setShowWelcomeText(false);
+              }}
             />
-          </div>
-        ))}
-      </div>
-      <button
-        onClick={prevSlide}
-        className={isDarkMode ? "text-[#0f172a]" : "text-white"}
-      >
-        <IconLeftArrow darkmode={isDarkMode} />
-      </button>
-      <button
-        onClick={nextSlide}
-        className={isDarkMode ? "text-[#0f172a]" : "text-white"}
-      >
-        <IconRightArrow darkmode={isDarkMode} />
-      </button>
-      <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-3">
-        {projectImages.map((_, index) => (
-          <button
-            key={index}
-            className={`h-3 w-3 cursor-pointer rounded-full transition-colors ${
+          ))}
+        </div>
+
+        <div
+          className={`${showWelcomeText ? "opacity-100" : "opacity-0"} absolute top-1/2 left-1/2 z-2 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center px-6 text-center duration-600 ${isDarkMode ? "text-[#0f172a]" : "text-white"}`}
+        >
+          <h2
+            className={`slide-up-animation-now translate-y-25 text-8xl font-bold opacity-0 max-lg:text-6xl max-md:text-4xl ${isDarkMode ? "text-[#0f172a]" : "text-white"}`}
+          >
+            {project.title}
+          </h2>
+          <p
+            className={`slide-up-animation-05s mt-8 mb-10 w-160 translate-y-25 text-xl opacity-0 max-lg:w-100 max-lg:text-lg max-md:text-base max-sm:w-full max-sm:max-w-64 ${isDarkMode ? "text-[#1f2937]" : "text-white max-sm:text-xs"}`}
+          >
+            {t(`${project.slug}.description`)}
+          </p>
+
+          <a
+            href={project.githubLink}
+            target="_blank"
+            rel="noreferrer"
+            onMouseEnter={() => setIsButtonHovered(true)}
+            onMouseLeave={() => setIsButtonHovered(false)}
+            className={`slide-up-animation translate-y-25 cursor-pointer px-32 text-lg tracking-wider uppercase opacity-0 duration-900 before:absolute before:top-1/2 before:left-10 before:h-px before:w-8 before:origin-left before:-translate-y-1/2 before:transition-all before:duration-900 before:ease-out before:content-[''] after:absolute after:top-1/2 after:right-10 after:h-px after:w-8 after:origin-right after:-translate-y-1/2 after:transition-all after:duration-900 after:ease-out after:content-[''] hover:before:w-16 hover:after:w-16 max-sm:px-20 max-sm:text-sm ${
               isDarkMode
-                ? index === currentIndex
-                  ? "bg-[#0f172a]"
-                  : "bg-[#0f172a]/40"
-                : index === currentIndex
-                  ? "bg-white"
-                  : "bg-white/50"
+                ? "text-[#1f2937] before:bg-[#374151] after:bg-[#374151] hover:text-[#0f172a] hover:before:bg-[#0f172a] hover:after:bg-[#0f172a]"
+                : "text-[#eee] before:bg-[#aaa] after:bg-[#aaa] hover:text-white hover:before:bg-white hover:after:bg-white"
             }`}
-            onClick={() => {
-              setCurrentIndex(index);
-              setShowWelcomeText(false);
-            }}
-          />
-        ))}
-      </div>
-
-      <div
-        className={`${showWelcomeText ? "opacity-100" : "opacity-0"} absolute top-1/2 left-1/2 z-2 flex w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center text-center duration-600 ${isDarkMode ? "text-[#0f172a]" : "text-white"}`}
-      >
-        <h2
-          className={`slide-up-animation-now translate-y-25 text-8xl font-bold opacity-0 max-lg:text-6xl max-md:text-4xl ${isDarkMode ? "text-[#0f172a]" : "text-white"}`}
-        >
-          {project.title}
-        </h2>
-        <p
-          className={`slide-up-animation-05s mt-8 mb-10 w-160 translate-y-25 text-xl opacity-0 max-lg:w-100 max-lg:text-lg max-md:text-base max-sm:w-40 ${isDarkMode ? "text-[#1f2937]" : "text-white max-sm:text-xs"}`}
-        >
-          {t(`${project.slug}.description`)}
-        </p>
-
-        <a
-          href={project.githubLink}
-          target="_blank"
-          rel="noreferrer"
-          onMouseEnter={() => setIsButtonHovered(true)}
-          onMouseLeave={() => setIsButtonHovered(false)}
-          className={`slide-up-animation translate-y-25 cursor-pointer px-32 text-lg tracking-wider uppercase opacity-0 duration-900 before:absolute before:top-1/2 before:left-10 before:h-px before:w-8 before:origin-left before:-translate-y-1/2 before:transition-all before:duration-900 before:ease-out before:content-[''] after:absolute after:top-1/2 after:right-10 after:h-px after:w-8 after:origin-right after:-translate-y-1/2 after:transition-all after:duration-900 after:ease-out after:content-[''] hover:before:w-16 hover:after:w-16 max-sm:text-sm ${
-            isDarkMode
-              ? "text-[#1f2937] before:bg-[#374151] after:bg-[#374151] hover:text-[#0f172a] hover:before:bg-[#0f172a] hover:after:bg-[#0f172a]"
-              : "text-[#eee] before:bg-[#aaa] after:bg-[#aaa] hover:text-white hover:before:bg-white hover:after:bg-white"
-          }`}
-        >
-          Visit on github
-        </a>
+          >
+            Visit on github
+          </a>
+        </div>
       </div>
       {isNavigating && <div className="white-wipe-in" />}
       <Link

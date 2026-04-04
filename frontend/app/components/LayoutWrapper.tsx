@@ -18,14 +18,22 @@ export default function RootLayout({
   const [isClosingAnimation, setIsClosingAnimation] = useState(false);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
+  const normalizePath = (path: string) => {
+    if (!path) return "/";
+    return path === "/" ? path : path.replace(/\/+$/, "");
+  };
+
   const handleNavigation = (href: string) => {
-    if (isClosingAnimation) return;
+    if (isClosingAnimation) return false;
+    if (normalizePath(pathname) === normalizePath(href)) return false;
+
     setIsClosingAnimation(true);
 
     setTimeout(() => {
       router.push(href);
-      // setIsAnimating(false);
     }, 2000); // 2 sekundy animacji
+
+    return true;
   };
 
   const handleLocaleChange = (locale: Locale) => {

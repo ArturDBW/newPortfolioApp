@@ -7,7 +7,7 @@ import IconHamburger from "../icons/IconHamburger";
 // import { usePathname } from "next/navigation";
 
 type Props = {
-  onNavigate: (href: string) => void;
+  onNavigate: (href: string) => boolean;
   onLocaleChange: (locale: Locale) => void;
   onBurgerMenuOpen: () => void;
   isBurgerMenuOpen: boolean;

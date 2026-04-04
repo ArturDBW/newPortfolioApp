@@ -7,7 +7,7 @@ import IconLinkedin from "../icons/IconLinkedin";
 import IconClose from "../icons/IconClose";
 
 type Props = {
-  onNavigate: (href: string) => void;
+  onNavigate: (href: string) => boolean;
   onLocaleChange: (locale: Locale) => void;
   onClose: () => void;
 };
@@ -40,8 +40,11 @@ export default function BurgerMenu({
     href: string,
   ) => {
     e.preventDefault(); // blokujemy natychmiastowy navigation
-    onNavigate(href); // next-intl router sam dodaje aktualny prefiks locale
-    setTimeout(onClose, 2000); // Zamykamy menu po zakończeniu animacji nawigacji
+    const didNavigate = onNavigate(href); // next-intl router sam dodaje aktualny prefiks locale
+
+    if (didNavigate) {
+      setTimeout(onClose, 2000); // Zamykamy menu po zakończeniu animacji nawigacji
+    }
   };
 
   const linkClass = (href: string) =>

@@ -7,14 +7,28 @@
     "nextProjectSlug": "personal-finance-app",
     "description": "e-learning platform",
     "images": [
-      "/img/skillSphere/skillsphere1.png",
-      "/img/skillSphere/skillsphere2.png",
-      "/img/skillSphere/skillsphere3.png",
-      "/img/skillSphere/skillsphere4.png",
-      "/img/skillSphere/skillsphere5.png",
-      "/img/skillSphere/skillsphere6.png",
-      "/img/skillSphere/skillsphere7.png",
-      "/img/skillSphere/skillsphere8.png"
+      {
+        "desktop": [
+          "/img/desktop/skillSphere/skillsphere1.png",
+          "/img/desktop/skillSphere/skillsphere2.png",
+          "/img/desktop/skillSphere/skillsphere3.png",
+          "/img/desktop/skillSphere/skillsphere4.png",
+          "/img/desktop/skillSphere/skillsphere5.png",
+          "/img/desktop/skillSphere/skillsphere6.png",
+          "/img/desktop/skillSphere/skillsphere7.png",
+          "/img/desktop/skillSphere/skillsphere8.png"
+        ],
+        "mobile": [
+          "/img/mobile/skillSphere/skillsphere1.png",
+          "/img/mobile/skillSphere/skillsphere2.png",
+          "/img/mobile/skillSphere/skillsphere3.png",
+          "/img/mobile/skillSphere/skillsphere4.png",
+          "/img/mobile/skillSphere/skillsphere5.png",
+          "/img/mobile/skillSphere/skillsphere6.png",
+          "/img/mobile/skillSphere/skillsphere7.png",
+          "/img/mobile/skillSphere/skillsphere8.png"
+        ]
+      }
     ],
     "githubLink": "https://github.com/ArturDBW/SkillSphereApp",
     "projectLink": "https://skill-sphere-app-frontend.vercel.app/",
@@ -28,13 +42,26 @@
     "nextProjectSlug": "audiophile-shop",
     "description": "financial assistant",
     "images": [
-      "/img/personalFinanceApp/personalfinanceapp1.png",
-      "/img/personalFinanceApp/personalfinanceapp2.png",
-      "/img/personalFinanceApp/personalfinanceapp3.png",
-      "/img/personalFinanceApp/personalfinanceapp4.png",
-      "/img/personalFinanceApp/personalfinanceapp5.png",
-      "/img/personalFinanceApp/personalfinanceapp6.png",
-      "/img/personalFinanceApp/personalfinanceapp7.png"
+      {
+        "desktop": [
+          "/img/desktop/personalFinanceApp/personalfinanceapp1.png",
+          "/img/desktop/personalFinanceApp/personalfinanceapp2.png",
+          "/img/desktop/personalFinanceApp/personalfinanceapp3.png",
+          "/img/desktop/personalFinanceApp/personalfinanceapp4.png",
+          "/img/desktop/personalFinanceApp/personalfinanceapp5.png",
+          "/img/desktop/personalFinanceApp/personalfinanceapp6.png",
+          "/img/desktop/personalFinanceApp/personalfinanceapp7.png"
+        ],
+        "mobile": [
+          "/img/mobile/personalFinanceApp/personalfinanceapp1.png",
+          "/img/mobile/personalFinanceApp/personalfinanceapp2.png",
+          "/img/mobile/personalFinanceApp/personalfinanceapp3.png",
+          "/img/mobile/personalFinanceApp/personalfinanceapp4.png",
+          "/img/mobile/personalFinanceApp/personalfinanceapp5.png",
+          "/img/mobile/personalFinanceApp/personalfinanceapp6.png",
+          "/img/mobile/personalFinanceApp/personalfinanceapp7.png"
+        ]
+      }
     ],
     "githubLink": "https://github.com/ArturDBW/personalFinanceApp",
     "projectLink": "https://personal-finance-app-two-kohl.vercel.app",
@@ -48,13 +75,26 @@
     "nextProjectSlug": "skillsphere",
     "description": "e-commerce",
     "images": [
-      "/img/audiophileShop/audiophileshop1.png",
-      "/img/audiophileShop/audiophileshop2.png",
-      "/img/audiophileShop/audiophileshop3.png",
-      "/img/audiophileShop/audiophileshop4.png",
-      "/img/audiophileShop/audiophileshop5.png",
-      "/img/audiophileShop/audiophileshop6.png",
-      "/img/audiophileShop/audiophileshop7.png"
+      {
+        "desktop": [
+          "/img/desktop/audiophileshop/audiophileshop1.png",
+          "/img/desktop/audiophileshop/audiophileshop2.png",
+          "/img/desktop/audiophileshop/audiophileshop3.png",
+          "/img/desktop/audiophileshop/audiophileshop4.png",
+          "/img/desktop/audiophileshop/audiophileshop5.png",
+          "/img/desktop/audiophileshop/audiophileshop6.png",
+          "/img/desktop/audiophileshop/audiophileshop7.png"
+        ],
+        "mobile": [
+          "/img/mobile/audiophileshop/audiophileshop1.png",
+          "/img/mobile/audiophileshop/audiophileshop2.png",
+          "/img/mobile/audiophileshop/audiophileshop3.png",
+          "/img/mobile/audiophileshop/audiophileshop4.png",
+          "/img/mobile/audiophileshop/audiophileshop5.png",
+          "/img/mobile/audiophileshop/audiophileshop6.png",
+          "/img/mobile/audiophileshop/audiophileshop7.png"
+        ]
+      }
     ],
     "githubLink": "https://github.com/ArturDBW/audiophileShop",
     "projectLink": "https://audiophileshopapp.vercel.app/",
