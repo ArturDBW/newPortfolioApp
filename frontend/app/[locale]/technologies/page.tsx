@@ -34,7 +34,7 @@ export default function Page() {
               {t("description")}
             </p>
           </div>
-          <div className="slide-up-animation-3s flex translate-y-25 flex-wrap space-y-12 space-x-12 px-25 py-20 opacity-0 max-[400px]:flex-col max-[400px]:items-center max-[400px]:justify-center max-xl:px-10 max-md:py-10">
+          <div className="slide-up-animation-3s flex translate-y-25 flex-wrap gap-12 px-25 py-20 opacity-0 max-[400px]:flex-col max-[400px]:items-center max-[400px]:justify-center max-xl:px-10 max-md:justify-center max-md:py-10">
             <IconHTML />
             <IconCSS />
             <IconSass />
